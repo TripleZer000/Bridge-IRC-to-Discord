@@ -19,14 +19,18 @@ bot.addListener('message#blah', function(from, message) {
 bot.addListener('pm', function(nick, message) {
     console.log('Got private message from %s: %s', nick, message);
 });
-bot.addListener('join', function(channel, who) {
-    console.log('%s has joined %s', who, channel);
+bot.addListener('action', function (from, to, text, message) {
+    client.channels.get('discord_channel_id').send('*'+ from + ' ' + text + '*')
 });
-bot.addListener('part', function(channel, who, reason) {
-    console.log('%s has left %s: %s', who, channel, reason);
+bot.addListener('join', function(channel, nick, message) {
+    console.log(nick)
+    client.channels.get('discord_channel_id').send('*' + nick + ' has joined IRC #lobby*');
+});
+bot.addListener('quit', function(nick) {
+    client.channels.get('discord_channel_id').send('*' + nick + ' has left IRC #lobby*');
 });
 bot.addListener('kick', function(channel, who, by, reason) {
-    console.log('%s was kicked from %s by %s: %s', who, channel, by, reason);
+    client.channels.get('discord_channel_id').send('*' + who + ' was kicked by ' + by + '*');
 });
 
   // discord
