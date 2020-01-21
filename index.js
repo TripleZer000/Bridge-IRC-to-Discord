@@ -16,21 +16,20 @@ bot.addListener('message#blah', function(from, message) {
     console.log('<%s> %s', from, message);
 });
 
-bot.addListener('pm', function(nick, message) {
-    console.log('Got private message from %s: %s', nick, message);
-});
+/// YOOOOOOOOOOOOOOOOOOOO edit discord channel ids
+
 bot.addListener('action', function (from, to, text, message) {
-    client.channels.get('discord_channel_id').send('*'+ from + ' ' + text + '*')
+    client.channels.get('discord_channel_id').send('***'+ from + ' ' + text + '***')
 });
 bot.addListener('join', function(channel, nick, message) {
     console.log(nick)
-    client.channels.get('discord_channel_id').send('*' + nick + ' has joined IRC #lobby*');
+    client.channels.get('discord_channel_id').send('**```' + nick + ' has joined IRC #lobby      [irc.evilcorp.ga]```**');
 });
 bot.addListener('quit', function(nick) {
-    client.channels.get('discord_channel_id').send('*' + nick + ' has left IRC #lobby*');
+    client.channels.get('discord_channel_id').send('**```' + nick + ' has left IRC #lobby      [irc.evilcorp.ga]```**');
 });
 bot.addListener('kick', function(channel, who, by, reason) {
-    client.channels.get('discord_channel_id').send('*' + who + ' was kicked by ' + by + '*');
+    client.channels.get('discord_channel_id').send('**```' + who + ' was kicked by ' + by + '      [irc.evilcorp.ga]```**');
 });
 
   // discord
