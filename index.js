@@ -3,9 +3,9 @@ const client = new Discord.Client();
 const token = process.env.DISCORD_BOT_SECRET;
 const url = require('./url.js');
 var irc = require('irc');
-var bot = new irc.Client('irc_server_here', 'irc_bot_name', {
-    password: ('irc_bot_password'),
-    channels: ['irc_#channel'],
+var bot = new irc.Client('irc_server', 'irc_nick', {
+    password: ('irc_pass'),
+    channels: ['irc_channel'],
 });
 
 bot.addListener('error', function(message) {
@@ -19,17 +19,17 @@ bot.addListener('message#blah', function(from, message) {
 /// YOOOOOOOOOOOOOOOOOOOO edit discord channel ids
 
 bot.addListener('action', function (from, to, text, message) {
-    client.channels.get('discord_channel_id').send('***'+ from + ' ' + text + '***')
+    client.channels.get('discord_id').send('***'+ from + ' ' + text + '***')
 });
 bot.addListener('join', function(channel, nick, message) {
     console.log(nick)
-    client.channels.get('discord_channel_id').send('**```' + nick + ' has joined IRC #lobby      [irc.evilcorp.ga]```**');
+    client.channels.get('discord_id').send('**```' + nick + ' has joined IRC #lobby      [irc.evilcorp.ga]```**');
 });
 bot.addListener('quit', function(nick) {
-    client.channels.get('discord_channel_id').send('**```' + nick + ' has left IRC #lobby      [irc.evilcorp.ga]```**');
+    client.channels.get('discord_id').send('**```' + nick + ' has left IRC #lobby      [irc.evilcorp.ga]```**');
 });
 bot.addListener('kick', function(channel, who, by, reason) {
-    client.channels.get('discord_channel_id').send('**```' + who + ' was kicked by ' + by + '      [irc.evilcorp.ga]```**');
+    client.channels.get('discord_id').send('**```' + who + ' was kicked by ' + by + '      [irc.evilcorp.ga]```**');
 });
 
   // discord
@@ -40,16 +40,16 @@ client.on('ready', () => {
 
 client.on('message', message =>
 {
- if (message.author.username === 'irc_bot_name' || message.channel.name != 'lair') {
+ if (message.author.username === 'irc_nick' || message.channel.name != 'irc_channel') {
  }
  else {
-         bot.say('irc_#channel', '[Discord_' + message.author.username + ']: ' + message.content)
+         bot.say('irc_#channel', '[' + message.author.username + ']: ' + message.content)
  }
 });
 bot.addListener('message', function(from, to, message) 
 {
     console.log('%s => %s: %s', from, to, message);
-    client.channels.get('discord_channel_id').send('[IRC_' + from + ']: ' + message);
+    client.channels.get('discord_id').send('[' + from + ']: ' + message);
 });
 
  // !info DarkLair
